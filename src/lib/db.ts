@@ -71,10 +71,13 @@ const initialBlogs: Blog[] = [
   }
 ];
 
-// Fallback in-memory singleton for serverless runtimes where disk may be read-only or ephemeral
+// Seed data bundled directly so Vercel serverless lambdas have access even without disk access
+import seedData from "../../data/storage.json";
+
+// Fallback in-memory singleton for serverless runtimes
 const memoryStore: StorageData = {
-  users: [...initialUsers],
-  blogs: [...initialBlogs],
+  users: seedData?.users && seedData.users.length > 0 ? [...seedData.users] : [...initialUsers],
+  blogs: seedData?.blogs && seedData.blogs.length > 0 ? [...seedData.blogs] : [...initialBlogs],
 };
 
 const DATA_FILE = path.join(process.cwd(), "data", "storage.json");
@@ -94,7 +97,10 @@ function loadData(): StorageData {
   try {
     if (fs.existsSync(DATA_FILE)) {
       const raw = fs.readFileSync(DATA_FILE, "utf-8");
-      return JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+      if (parsed && Array.isArray(parsed.blogs) && parsed.blogs.length > 0) {
+        return parsed;
+      }
     }
   } catch {
     // Return memory store if disk access fails
