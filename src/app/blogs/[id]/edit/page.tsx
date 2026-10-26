@@ -4,8 +4,10 @@ import React, { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { useConfirm } from "@/context/ConfirmContext";
+import { Blog } from "@/types";
 import Link from "next/link";
 import { ArrowLeft, Save, AlertCircle } from "lucide-react";
+import { clientBlogStorage } from "@/lib/clientStorage";
 
 export const dynamic = "force-dynamic";
 
@@ -29,12 +31,20 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
   useEffect(() => {
     const fetchBlog = async () => {
       try {
+        let b: Blog | null = null;
         const res = await fetch(`/api/blogs/${resolvedParams.id}`);
-        if (!res.ok) {
+        if (res.ok) {
+          const data = await res.json();
+          b = data.data;
+          if (b) clientBlogStorage.saveBlog(b);
+        } else {
+          // Fallback to client storage
+          b = clientBlogStorage.getBlogById(resolvedParams.id);
+        }
+
+        if (!b) {
           throw new Error("Could not find article.");
         }
-        const data = await res.json();
-        const b = data.data;
 
         // Authorization check: User must be author
         if (user && b.authorId !== user.userId) {
@@ -48,8 +58,21 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
         setImageUrl(b.imageUrl || "");
         setContent(b.content);
       } catch (err: unknown) {
-        const msg = err instanceof Error ? err.message : "Failed to load blog";
-        setError(msg);
+        const local = clientBlogStorage.getBlogById(resolvedParams.id);
+        if (local) {
+          if (user && local.authorId !== user.userId) {
+            setError("Forbidden: You do not have permission to edit this article.");
+            return;
+          }
+          setTitle(local.title);
+          setCategory(local.category || "General");
+          setSummary(local.summary || "");
+          setImageUrl(local.imageUrl || "");
+          setContent(local.content);
+        } else {
+          const msg = err instanceof Error ? err.message : "Failed to load blog";
+          setError(msg);
+        }
       } finally {
         setLoading(false);
       }
@@ -109,6 +132,10 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
 
       if (!res.ok) {
         throw new Error(data.error || "Failed to update article.");
+      }
+
+      if (data.data) {
+        clientBlogStorage.saveBlog(data.data);
       }
 
       router.push(`/blogs/${resolvedParams.id}`);

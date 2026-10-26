@@ -8,6 +8,8 @@ import { useConfirm } from "@/context/ConfirmContext";
 import { Blog } from "@/types";
 import { ArrowLeft, Clock, Calendar, User, Edit3, Trash2, Share2, Check, Sparkles } from "lucide-react";
 
+import { clientBlogStorage } from "@/lib/clientStorage";
+
 export const dynamic = "force-dynamic";
 
 export default function BlogDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -26,14 +28,32 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
     const fetchBlog = async () => {
       try {
         const res = await fetch(`/api/blogs/${resolvedParams.id}`);
-        if (!res.ok) {
-          throw new Error("Article not found.");
+        if (res.ok) {
+          const data = await res.json();
+          setBlog(data.data);
+          // Sync to client storage for cross-lambda persistence
+          clientBlogStorage.saveBlog(data.data);
+          return;
         }
-        const data = await res.json();
-        setBlog(data.data);
+
+        // If server responded with 404 (e.g. serverless instance isolation on Vercel),
+        // fallback to client-side localStorage
+        const local = clientBlogStorage.getBlogById(resolvedParams.id);
+        if (local) {
+          setBlog(local);
+          return;
+        }
+
+        throw new Error("Article not found.");
       } catch (err: unknown) {
-        const msg = err instanceof Error ? err.message : "Failed to load article";
-        setError(msg);
+        // Fallback to client storage before displaying error
+        const local = clientBlogStorage.getBlogById(resolvedParams.id);
+        if (local) {
+          setBlog(local);
+        } else {
+          const msg = err instanceof Error ? err.message : "Failed to load article";
+          setError(msg);
+        }
       } finally {
         setLoading(false);
       }
@@ -61,10 +81,13 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
         method: "DELETE",
       });
 
-      if (!res.ok) {
+      if (!res.ok && res.status !== 404) {
         const data = await res.json();
         throw new Error(data.error || "Failed to delete article.");
       }
+
+      // Remove from client storage as well
+      clientBlogStorage.removeBlog(resolvedParams.id);
 
       router.push("/");
       router.refresh();

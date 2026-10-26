@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Blog } from "@/types";
 import { Search, ArrowRight, Clock, User, Calendar, BookOpen, Sparkles, Filter } from "lucide-react";
 
+import { clientBlogStorage } from "@/lib/clientStorage";
+
 const CATEGORIES = ["All", "Architecture", "Design", "Performance", "Technology", "General"];
 
 export default function HomePage() {
@@ -22,12 +24,35 @@ export default function HomePage() {
       if (cat && cat !== "All") params.append("category", cat);
 
       const res = await fetch(`/api/blogs?${params.toString()}`);
+      let serverBlogs: Blog[] = [];
       if (res.ok) {
         const json = await res.json();
-        setBlogs(json.data || []);
+        serverBlogs = json.data || [];
       }
+
+      // Merge server blogs with any blogs persisted in client storage
+      let merged = clientBlogStorage.mergeWithServerBlogs(serverBlogs);
+
+      if (q.trim()) {
+        const queryLower = q.trim().toLowerCase();
+        merged = merged.filter(
+          (b) =>
+            b.title.toLowerCase().includes(queryLower) ||
+            b.content.toLowerCase().includes(queryLower) ||
+            b.authorName?.toLowerCase().includes(queryLower)
+        );
+      }
+
+      if (cat && cat !== "All") {
+        merged = merged.filter((b) => b.category?.toLowerCase() === cat.toLowerCase());
+      }
+
+      setBlogs(merged);
     } catch (err) {
       console.error("Failed to fetch blogs:", err);
+      // Fallback directly to client storage
+      const fallback = clientBlogStorage.getBlogs();
+      setBlogs(fallback);
     } finally {
       setLoading(false);
     }

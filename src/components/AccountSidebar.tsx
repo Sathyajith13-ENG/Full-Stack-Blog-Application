@@ -21,6 +21,8 @@ import {
   Activity
 } from "lucide-react";
 
+import { clientBlogStorage } from "@/lib/clientStorage";
+
 interface ProfileData {
   id: string;
   name: string;
@@ -61,10 +63,33 @@ export default function AccountSidebar() {
       const res = await fetch("/api/user/profile");
       if (res.ok) {
         const json = await res.json();
-        setProfile(json.profile);
-        setName(json.profile.name);
-        setBio(json.profile.bio || "");
-        setAvatarUrl(json.profile.avatarUrl || "");
+        const prof = json.profile;
+
+        // Merge with client-side authored blogs for this user
+        const localBlogs = clientBlogStorage.getBlogs().filter((b) => b.authorId === user?.userId);
+        const articlesMap = new Map<string, { id: string; title: string; category?: string; createdAt: string }>();
+
+        (prof.articles || []).forEach((a: { id: string; title: string; category?: string; createdAt: string }) => {
+          articlesMap.set(a.id, a);
+        });
+
+        localBlogs.forEach((b) => {
+          articlesMap.set(b.id, {
+            id: b.id,
+            title: b.title,
+            category: b.category,
+            createdAt: b.createdAt,
+          });
+        });
+
+        const mergedArticles = Array.from(articlesMap.values());
+        prof.articles = mergedArticles;
+        prof.totalArticles = mergedArticles.length;
+
+        setProfile(prof);
+        setName(prof.name);
+        setBio(prof.bio || "");
+        setAvatarUrl(prof.avatarUrl || "");
       }
     } catch (err) {
       console.error("Failed to fetch user profile", err);

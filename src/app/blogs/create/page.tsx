@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 import { ArrowLeft, Send, Sparkles, AlertCircle } from "lucide-react";
+import { clientBlogStorage } from "@/lib/clientStorage";
 
 const CATEGORIES = ["Architecture", "Design", "Performance", "Technology", "General"];
 
@@ -59,6 +60,11 @@ export default function CreateBlogPage() {
 
       if (!res.ok) {
         throw new Error(data.error || "Failed to publish article.");
+      }
+
+      // Save to client storage so it immediately persists on Vercel
+      if (data.data) {
+        clientBlogStorage.saveBlog(data.data);
       }
 
       router.push(`/blogs/${data.data.id}`);
