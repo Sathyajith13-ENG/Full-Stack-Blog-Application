@@ -66,7 +66,7 @@
     },
     {
       "id": "blog-1793014703320-oh8j",
-      "title": "modern technology",
+      "title": "ARTIFICIAL AND INTELLIGENCE👾",
       "content": "The history of artificial intelligence (AI) began in antiquity, with myths, stories, and rumors of artificial beings endowed with intelligence by master craftsmen.[1]\n\nThe field of research that eventually evolved into what is widely described as artificial intelligence was founded at a workshop held on the campus of Dartmouth College in 1956.[2] At the workshop, a concept of the first AI program, Logic Theorist, was presented by future Turing Awardee Allen Newell and future Nobel Laureate Herbert A. Simon, with help from J. C. Shaw. The software architecture of this program differed from modern AI systems in that it was a hand-written fixed script. Attendees of the workshop became the leaders of AI research for decades. Many of them predicted that machines as intelligent as humans would exist within a generation. Despite the eventual success of its attendees and the field as a whole, the workshop was considered a failure. \"When the workshop failed to deliver, AI was dismissed as a pipe dream and research funding dried up\".[3][4]\n\nIt became apparent that researchers had underestimated the complexity of this objective.[5] In 1974, criticism from James Lighthill and pressure from the U.S. Congress led the U.S. and British Governments to stop funding undirected research into artificial intelligence. Seven years later, a visionary initiative by the Japanese Government and the success of expert systems reinvigorated investment in AI, and by the late 1980s, the industry had grown into a billion-dollar enterprise. However, investors' enthusiasm waned in the 1990s, and the field was criticized in the press and avoided by industry (a period known as an \"AI winter\"). Nevertheless, research and funding continued to grow under other names. In the early 2000s, machine learning was applied to a wide range of problems in academia and industry. The success was attributable to the availability of powerful computer hardware, the accumulation of expansive data sets, and the application of rigorous mathematical methods. Soon after, deep learning proved to be a breakthrough technology, eclipsing all other methods. The transformer architecture, introduced in 2017, and was utilized to produce generative AI applications, among other implementation.\n\nInvestment in AI boomed in the 2020s. The AI boom, initiated by the development of transformer architecture, led to the rapid scaling and public releases of large language models (LLMs) like ChatGPT and Claude (AI). These models exhibit human-like traits of knowledge, attention, and creativity, and have been integrated into various sectors, fueling exponential investment in AI. However, concerns about the potential risks and ethical implications of advanced AI have also emerged, causing debate about the future of AI and its impact on society.",
       "summary": "Interesting fact abouts AI evolution 🤖",
       "category": "Technology",
@@ -75,8 +75,21 @@
       "authorName": "mass2004",
       "authorEmail": "jithsathya24@gmail.com",
       "createdAt": "2026-10-26T11:38:23.320Z",
-      "updatedAt": "2026-10-26T12:08:21.195Z",
+      "updatedAt": "2026-10-26T12:23:49.236Z",
       "imageUrl": ""
+    },
+    {
+      "id": "blog-1793018971153-89u8",
+      "title": "TRENDING AI-AGENTS",
+      "content": "History\nMain article: History of artificial intelligence\nThe theoretical underpinnings for artificial agents emerged in the mid 20th century, with establishment of cybernetics and artificial intelligence. Oliver Selfridge's 1958 \"Pandemonium: A Paradigm for Learning\" paper was an important early theoretical contribution in establishing agent oriented architecture. Practical implementations of agents for real world applications began to become widespread in the 1990s, after the introduction of the belief–desire–intention software model (BDI), and agent-oriented programming. Harvard professor Milind Tambe notes that in the 1990s, the definition of an AI agent was not clear. Pure digital agents were deployed in computer infrastructure for purposes such as monitoring, while agents connected to real-world sensors and actuators were increasingly used in industrial control systems.[10][11][12]\n\nEarly artificial agents tended to have simple if then logic, which expanded over time into large decision tree models. By the early 2010s, products like Siri and Alexa were released, and were sometimes called AI agents, though they lacked the general purpose reasoning ability of later agents run by large language models (LLMs). The development of LLMs during the late 2010s and early 2020s introduced new approaches to AI agents. Models such as GPT-3 demonstrated the ability to generate and understand natural language at a much larger scale than many earlier language systems.[13]\n\nAcademics began to study LLM agents from 2018. Deployment of such agents began to accelerate in late 2023 after OpenAI's \"function-calling\" API was made available, and especially after Anthropic's late 2024 introduction of Model Context Protocol (MCP), a standardised way for LLM agents to gain contextual awareness, and to act on the world by calling various external tools. The term \"agentic\" only began to be used with any frequency in 2024, popularised in part by researcher",
+      "summary": "top 10 ai agents",
+      "category": "Technology",
+      "readTime": "2 min read",
+      "authorId": "usr-1793014544562-gq78i",
+      "authorName": "TECH VISION",
+      "authorEmail": "jithsathya24@gmail.com",
+      "createdAt": "2026-10-26T12:49:31.151Z",
+      "updatedAt": "2026-10-26T12:49:31.151Z"
     }
   ]
 }
