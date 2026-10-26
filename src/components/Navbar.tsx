@@ -3,11 +3,26 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { useConfirm } from "@/context/ConfirmContext";
 import { PenSquare, LogIn, UserPlus, LogOut, Menu, X, Sparkles } from "lucide-react";
 
 export default function Navbar() {
   const { user, loading, logout, sidebarOpen, toggleSidebar } = useAuth();
+  const { confirm } = useConfirm();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleLogout = async () => {
+    const ok = await confirm({
+      title: "Sign Out",
+      message: "Are you sure you want to log out of your account?",
+      confirmText: "Yes, Sign Out",
+      cancelText: "No, Stay Signed In",
+      variant: "danger",
+    });
+    if (ok) {
+      await logout();
+    }
+  };
 
   return (
     <header className="navbar">
@@ -57,7 +72,7 @@ export default function Navbar() {
                     </button>
 
                     <button
-                      onClick={logout}
+                      onClick={handleLogout}
                       className="btn btn-outline btn-sm"
                       title="Log Out"
                       style={{ padding: "0.4rem 0.65rem" }}
@@ -115,7 +130,7 @@ export default function Navbar() {
               <div style={{ padding: "0.5rem 0", color: "var(--text-secondary)", fontSize: "0.875rem" }}>
                 Signed in as <strong style={{ color: "#fff" }}>{user.name}</strong>
               </div>
-              <button onClick={() => { logout(); setMobileMenuOpen(false); }} className="btn btn-danger">
+              <button onClick={() => { setMobileMenuOpen(false); handleLogout(); }} className="btn btn-danger">
                 <LogOut size={16} /> Log Out
               </button>
             </>

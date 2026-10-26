@@ -3,6 +3,7 @@
 import React, { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { useConfirm } from "@/context/ConfirmContext";
 import Link from "next/link";
 import { ArrowLeft, Save, AlertCircle } from "lucide-react";
 
@@ -14,6 +15,7 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
   const resolvedParams = use(params);
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
+  const { confirm } = useConfirm();
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Architecture");
@@ -73,6 +75,18 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
 
     if (content.trim().length < 10) {
       setError("Article content must be at least 10 characters long.");
+      return;
+    }
+
+    const ok = await confirm({
+      title: "Save Changes",
+      message: "Are you sure you want to save the updates made to this article?",
+      confirmText: "Yes, Save Changes",
+      cancelText: "No, Keep Editing",
+      variant: "lime",
+    });
+
+    if (!ok) {
       return;
     }
 

@@ -4,6 +4,7 @@ import React, { useEffect, useState, use } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { useConfirm } from "@/context/ConfirmContext";
 import { Blog } from "@/types";
 import { ArrowLeft, Clock, Calendar, User, Edit3, Trash2, Share2, Check, Sparkles } from "lucide-react";
 
@@ -13,6 +14,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
   const resolvedParams = use(params);
   const router = useRouter();
   const { user } = useAuth();
+  const { confirm } = useConfirm();
 
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
@@ -41,7 +43,15 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
   }, [resolvedParams.id]);
 
   const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to permanently delete this article?")) {
+    const ok = await confirm({
+      title: "Delete Article",
+      message: `Are you sure you want to permanently delete "${blog?.title || "this article"}"? This action cannot be undone.`,
+      confirmText: "Yes, Delete",
+      cancelText: "No, Keep Article",
+      variant: "danger",
+    });
+
+    if (!ok) {
       return;
     }
 

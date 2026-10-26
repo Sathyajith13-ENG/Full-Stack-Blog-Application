@@ -16,10 +16,12 @@
     },
     {
       "id": "usr-1793014544562-gq78i",
-      "name": "mass2004",
+      "name": "TECH VISION",
       "email": "jithsathya24@gmail.com",
       "passwordHash": "$2b$10$HGUYtoKuWsD.8j7I42YO3.AKnwbL6MWZ.TpOdMpK4Gr5Iy2F9oeWO",
-      "createdAt": "2026-10-26T11:35:44.562Z"
+      "createdAt": "2026-10-26T11:35:44.562Z",
+      "bio": "Passionate writer and technology explorer.",
+      "avatarUrl": ""
     }
   ],
   "blogs": [
@@ -66,14 +68,15 @@
       "id": "blog-1793014703320-oh8j",
       "title": "modern technology",
       "content": "The history of artificial intelligence (AI) began in antiquity, with myths, stories, and rumors of artificial beings endowed with intelligence by master craftsmen.[1]\n\nThe field of research that eventually evolved into what is widely described as artificial intelligence was founded at a workshop held on the campus of Dartmouth College in 1956.[2] At the workshop, a concept of the first AI program, Logic Theorist, was presented by future Turing Awardee Allen Newell and future Nobel Laureate Herbert A. Simon, with help from J. C. Shaw. The software architecture of this program differed from modern AI systems in that it was a hand-written fixed script. Attendees of the workshop became the leaders of AI research for decades. Many of them predicted that machines as intelligent as humans would exist within a generation. Despite the eventual success of its attendees and the field as a whole, the workshop was considered a failure. \"When the workshop failed to deliver, AI was dismissed as a pipe dream and research funding dried up\".[3][4]\n\nIt became apparent that researchers had underestimated the complexity of this objective.[5] In 1974, criticism from James Lighthill and pressure from the U.S. Congress led the U.S. and British Governments to stop funding undirected research into artificial intelligence. Seven years later, a visionary initiative by the Japanese Government and the success of expert systems reinvigorated investment in AI, and by the late 1980s, the industry had grown into a billion-dollar enterprise. However, investors' enthusiasm waned in the 1990s, and the field was criticized in the press and avoided by industry (a period known as an \"AI winter\"). Nevertheless, research and funding continued to grow under other names. In the early 2000s, machine learning was applied to a wide range of problems in academia and industry. The success was attributable to the availability of powerful computer hardware, the accumulation of expansive data sets, and the application of rigorous mathematical methods. Soon after, deep learning proved to be a breakthrough technology, eclipsing all other methods. The transformer architecture, introduced in 2017, and was utilized to produce generative AI applications, among other implementation.\n\nInvestment in AI boomed in the 2020s. The AI boom, initiated by the development of transformer architecture, led to the rapid scaling and public releases of large language models (LLMs) like ChatGPT and Claude (AI). These models exhibit human-like traits of knowledge, attention, and creativity, and have been integrated into various sectors, fueling exponential investment in AI. However, concerns about the potential risks and ethical implications of advanced AI have also emerged, causing debate about the future of AI and its impact on society.",
-      "summary": "AI evolution",
+      "summary": "Interesting fact abouts AI evolution 🤖",
       "category": "Technology",
       "readTime": "3 min read",
       "authorId": "usr-1793014544562-gq78i",
       "authorName": "mass2004",
       "authorEmail": "jithsathya24@gmail.com",
       "createdAt": "2026-10-26T11:38:23.320Z",
-      "updatedAt": "2026-10-26T11:38:23.320Z"
+      "updatedAt": "2026-10-26T12:08:21.195Z",
+      "imageUrl": ""
     }
   ]
 }

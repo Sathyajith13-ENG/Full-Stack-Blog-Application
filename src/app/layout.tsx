@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import AccountSidebar from "@/components/AccountSidebar";
 import MotionBackground from "@/components/MotionBackground";
 
+import { ConfirmModalProvider } from "@/context/ConfirmContext";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,11 +34,13 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body style={{ minHeight: "100vh", display: "flex", flexDirection: "column", position: "relative" }}>
         <AuthProvider>
-          <MotionBackground />
-          <AccountSidebar />
-          <Navbar />
-          <main style={{ flex: 1, position: "relative", zIndex: 1 }}>{children}</main>
-          <Footer />
+          <ConfirmModalProvider>
+            <MotionBackground />
+            <AccountSidebar />
+            <Navbar />
+            <main style={{ flex: 1, position: "relative", zIndex: 1 }}>{children}</main>
+            <Footer />
+          </ConfirmModalProvider>
         </AuthProvider>
       </body>
     </html>

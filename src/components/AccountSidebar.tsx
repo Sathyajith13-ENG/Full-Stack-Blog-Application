@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { useConfirm } from "@/context/ConfirmContext";
 import {
   X,
   User,
@@ -38,6 +39,7 @@ interface ProfileData {
 
 export default function AccountSidebar() {
   const { user, sidebarOpen, setSidebarOpen, logout, updateUserState } = useAuth();
+  const { confirm } = useConfirm();
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
@@ -614,9 +616,18 @@ export default function AccountSidebar() {
             alignItems: "center"
           }}>
             <button
-              onClick={() => {
-                logout();
-                setSidebarOpen(false);
+              onClick={async () => {
+                const ok = await confirm({
+                  title: "Sign Out",
+                  message: "Are you sure you want to log out of your account?",
+                  confirmText: "Yes, Sign Out",
+                  cancelText: "No, Stay Signed In",
+                  variant: "danger",
+                });
+                if (ok) {
+                  setSidebarOpen(false);
+                  logout();
+                }
               }}
               className="btn btn-danger btn-sm"
               style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}
