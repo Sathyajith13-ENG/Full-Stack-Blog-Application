@@ -128,14 +128,38 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
         }),
       });
 
-      const data = await res.json();
+      // Calculate estimated read time for fallback
+      const wordsCount = content.trim().split(/\s+/).length;
+      const minutes = Math.max(1, Math.ceil(wordsCount / 200));
+      const readTime = `${minutes} min read`;
 
-      if (!res.ok) {
+      if (res.ok) {
+        const data = await res.json();
+        if (data.data) {
+          clientBlogStorage.saveBlog(data.data);
+        }
+      } else if (res.status === 404) {
+        // If the serverless lambda does not have the blog in its isolated memory,
+        // update the blog directly in the client persistent store!
+        const existing = clientBlogStorage.getBlogById(resolvedParams.id);
+        const updatedBlog: Blog = {
+          id: resolvedParams.id,
+          title: title.trim(),
+          category: category.trim(),
+          summary: summary.trim() || title.trim().slice(0, 150) + "...",
+          imageUrl: imageUrl.trim() || undefined,
+          content: content.trim(),
+          readTime,
+          authorId: user?.userId || existing?.authorId || "anonymous",
+          authorName: user?.name || existing?.authorName || "Author",
+          authorEmail: user?.email || existing?.authorEmail || "",
+          createdAt: existing?.createdAt || new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        };
+        clientBlogStorage.saveBlog(updatedBlog);
+      } else {
+        const data = await res.json();
         throw new Error(data.error || "Failed to update article.");
-      }
-
-      if (data.data) {
-        clientBlogStorage.saveBlog(data.data);
       }
 
       router.push(`/blogs/${resolvedParams.id}`);
