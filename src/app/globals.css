@@ -252,15 +252,137 @@ p {
   box-shadow: 0 0 10px var(--lime-primary);
 }
 
-/* Hero Section */
-.hero-glow {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 650px;
-  height: 350px;
-  background: radial-gradient(circle, rgba(132, 204, 22, 0.12) 0%, rgba(10, 12, 11, 0) 70%);
+/* Dynamic Motion Background with Images & Floating Ambient Geometry */
+.motion-bg-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
   pointer-events: none;
   z-index: 0;
 }
+
+.motion-bg-layer {
+  position: absolute;
+  inset: -20%;
+  background-image: 
+    radial-gradient(ellipse at 15% 25%, rgba(132, 204, 22, 0.15) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 75%, rgba(132, 204, 22, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(20, 30, 22, 0.6) 0%, rgba(10, 12, 11, 0.95) 75%),
+    url("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=2000&q=80");
+  background-size: 200% 200%, 200% 200%, 100% 100%, cover;
+  background-position: center;
+  background-blend-mode: screen, screen, normal, luminosity;
+  opacity: 0.18;
+  filter: blur(40px);
+  animation: dynamicMeshFlow 35s ease-in-out infinite alternate;
+}
+
+.motion-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at 50% 30%, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 30%, black 30%, transparent 80%);
+  animation: gridFloat 20s linear infinite;
+}
+
+.floating-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+.floating-orb-1 {
+  width: 480px;
+  height: 480px;
+  top: 5%;
+  left: 10%;
+  background: radial-gradient(circle, rgba(132, 204, 22, 0.22) 0%, rgba(132, 204, 22, 0) 70%);
+  animation-name: floatOrb1;
+  animation-duration: 18s;
+}
+
+.floating-orb-2 {
+  width: 520px;
+  height: 520px;
+  top: 40%;
+  right: 5%;
+  background: radial-gradient(circle, rgba(163, 230, 53, 0.16) 0%, rgba(163, 230, 53, 0) 70%);
+  animation-name: floatOrb2;
+  animation-duration: 24s;
+}
+
+.floating-orb-3 {
+  width: 380px;
+  height: 380px;
+  bottom: 10%;
+  left: 30%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+  animation-name: floatOrb3;
+  animation-duration: 20s;
+}
+
+@keyframes dynamicMeshFlow {
+  0% {
+    transform: scale(1) translate(0%, 0%) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.08) translate(-3%, 2%) rotate(2deg);
+  }
+  100% {
+    transform: scale(1.04) translate(2%, -3%) rotate(-2deg);
+  }
+}
+
+@keyframes gridFloat {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(48px);
+  }
+}
+
+@keyframes floatOrb1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(60px, 40px) scale(1.15);
+  }
+  100% {
+    transform: translate(-30px, 80px) scale(0.95);
+  }
+}
+
+@keyframes floatOrb2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-80px, 50px) scale(1.1);
+  }
+  100% {
+    transform: translate(40px, -60px) scale(0.9);
+  }
+}
+
+@keyframes floatOrb3 {
+  0% {
+    transform: translate(0, 0) scale(0.95);
+  }
+  50% {
+    transform: translate(70px, -40px) scale(1.12);
+  }
+  100% {
+    transform: translate(-50px, 30px) scale(1);
+  }
+}
+
