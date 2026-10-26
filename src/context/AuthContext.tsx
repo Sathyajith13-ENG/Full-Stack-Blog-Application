@@ -12,23 +12,38 @@ export interface AuthUser {
 interface AuthContextType {
   user: AuthUser | null;
   loading: boolean;
+  sidebarOpen: boolean;
+  setSidebarOpen: (open: boolean) => void;
+  toggleSidebar: () => void;
   login: (tokenData: { user: AuthUser }) => void;
   logout: () => Promise<void>;
   checkAuth: () => Promise<void>;
+  updateUserState: (updated: Partial<AuthUser>) => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   loading: true,
+  sidebarOpen: false,
+  setSidebarOpen: () => {},
+  toggleSidebar: () => {},
   login: () => {},
   logout: async () => {},
   checkAuth: async () => {},
+  updateUserState: () => {},
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
+
+  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
+
+  const updateUserState = (updated: Partial<AuthUser>) => {
+    setUser((prev) => (prev ? { ...prev, ...updated } : null));
+  };
 
   const checkAuth = async () => {
     try {
@@ -62,6 +77,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       await fetch("/api/auth/logout", { method: "POST" });
       setUser(null);
+      setSidebarOpen(false);
       router.push("/");
       router.refresh();
     } catch (err) {
@@ -70,7 +86,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, checkAuth }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        sidebarOpen,
+        setSidebarOpen,
+        toggleSidebar,
+        login,
+        logout,
+        checkAuth,
+        updateUserState,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

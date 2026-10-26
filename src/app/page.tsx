@@ -225,6 +225,32 @@ export default function HomePage() {
                       </div>
                     </div>
 
+                    {/* Optional Cover Image */}
+                    {blog.imageUrl && (
+                      <Link href={`/blogs/${blog.id}`} style={{ display: "block", marginBottom: "1.1rem" }}>
+                        <div style={{
+                          height: "180px",
+                          width: "100%",
+                          borderRadius: "var(--radius-md)",
+                          overflow: "hidden",
+                          border: "1px solid var(--border)"
+                        }}>
+                          <img
+                            src={blog.imageUrl}
+                            alt={blog.title}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                              transition: "transform 0.3s ease"
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.04)")}
+                            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                          />
+                        </div>
+                      </Link>
+                    )}
+
                     {/* Title */}
                     <Link href={`/blogs/${blog.id}`}>
                       <h3

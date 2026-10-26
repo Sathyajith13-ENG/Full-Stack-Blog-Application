@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { title, content, category, summary } = body;
+    const { title, content, category, summary, imageUrl } = body;
 
     if (!title || typeof title !== "string" || title.trim().length < 3) {
       return NextResponse.json(
@@ -88,6 +88,7 @@ export async function POST(request: NextRequest) {
       content: content.trim(),
       summary: summary?.trim() || title.trim().slice(0, 150) + "...",
       category: category?.trim() || "General",
+      imageUrl: imageUrl?.trim() || undefined,
       readTime: calculatedReadTime,
       authorId: user.userId,
       authorName: user.name,

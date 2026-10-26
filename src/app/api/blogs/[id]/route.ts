@@ -64,7 +64,7 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { title, content, category, summary } = body;
+    const { title, content, category, summary, imageUrl } = body;
 
     const updates: Record<string, string> = {};
     if (title && typeof title === "string" && title.trim().length >= 3) {
@@ -81,6 +81,9 @@ export async function PUT(
     }
     if (summary !== undefined) {
       updates.summary = summary ? summary.trim() : (updates.title || existingBlog.title).slice(0, 150) + "...";
+    }
+    if (imageUrl !== undefined) {
+      updates.imageUrl = imageUrl.trim();
     }
 
     const updated = db.updateBlog(id, updates);

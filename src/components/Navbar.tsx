@@ -6,7 +6,7 @@ import { useAuth } from "@/context/AuthContext";
 import { PenSquare, LogIn, UserPlus, LogOut, Menu, X, Sparkles } from "lucide-react";
 
 export default function Navbar() {
-  const { user, loading, logout } = useAuth();
+  const { user, loading, logout, sidebarOpen, toggleSidebar } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -33,24 +33,28 @@ export default function Navbar() {
                   </Link>
 
                   <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginLeft: "0.5rem" }}>
-                    <div style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.5rem",
-                      fontSize: "0.875rem",
-                      padding: "0.35rem 0.75rem",
-                      background: "var(--bg-card)",
-                      borderRadius: "var(--radius-full)",
-                      border: "1px solid var(--border)"
-                    }}>
+                    <button
+                      onClick={toggleSidebar}
+                      className="btn btn-outline btn-sm"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                        padding: "0.35rem 0.85rem",
+                        background: sidebarOpen ? "var(--lime-subtle)" : "var(--bg-card)",
+                        borderColor: sidebarOpen ? "var(--lime-primary)" : "var(--border)"
+                      }}
+                      title="Account & Status Settings"
+                    >
                       <div style={{
                         width: "8px",
                         height: "8px",
                         borderRadius: "50%",
-                        backgroundColor: "var(--lime-primary)"
+                        backgroundColor: "var(--lime-primary)",
+                        boxShadow: "0 0 6px var(--lime-primary)"
                       }} />
                       <span style={{ fontWeight: 600, color: "#fff" }}>{user.name}</span>
-                    </div>
+                    </button>
 
                     <button
                       onClick={logout}

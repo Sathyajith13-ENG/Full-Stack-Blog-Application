@@ -18,6 +18,7 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Architecture");
   const [summary, setSummary] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -42,6 +43,7 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
         setTitle(b.title);
         setCategory(b.category || "General");
         setSummary(b.summary || "");
+        setImageUrl(b.imageUrl || "");
         setContent(b.content);
       } catch (err: unknown) {
         const msg = err instanceof Error ? err.message : "Failed to load blog";
@@ -84,6 +86,7 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
           title,
           category,
           summary,
+          imageUrl,
           content,
         }),
       });
@@ -192,6 +195,28 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
               onChange={(e) => setSummary(e.target.value)}
             />
           </div>
+        </div>
+
+        <div className="input-group">
+          <label className="input-label" htmlFor="imageUrl">Cover Image URL (Optional)</label>
+          <input
+            id="imageUrl"
+            type="url"
+            className="input-field"
+            placeholder="e.g. https://images.unsplash.com/photo-1555066931-4365d14bab8c"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+          />
+          {imageUrl && (
+            <div style={{ marginTop: "0.5rem", borderRadius: "var(--radius-md)", overflow: "hidden", maxHeight: "180px", border: "1px solid var(--border)" }}>
+              <img
+                src={imageUrl}
+                alt="Article cover preview"
+                style={{ width: "100%", height: "180px", objectFit: "cover" }}
+                onError={(e) => (e.currentTarget.style.display = "none")}
+              />
+            </div>
+          )}
         </div>
 
         <div className="input-group">

@@ -224,6 +224,28 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
             )}
           </div>
         </div>
+        {/* Cover Image */}
+        {blog.imageUrl && (
+          <div style={{
+            marginTop: "1.75rem",
+            borderRadius: "var(--radius-lg)",
+            overflow: "hidden",
+            border: "1px solid var(--border)",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.6)",
+            maxHeight: "440px"
+          }}>
+            <img
+              src={blog.imageUrl}
+              alt={blog.title}
+              style={{
+                width: "100%",
+                maxHeight: "440px",
+                objectFit: "cover",
+                display: "block"
+              }}
+            />
+          </div>
+        )}
       </header>
 
       {/* Main Body */}

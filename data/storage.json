@@ -1,0 +1,79 @@
+{
+  "users": [
+    {
+      "id": "user-demo-1",
+      "name": "Alex Rivera",
+      "email": "alex@example.com",
+      "passwordHash": "$2a$10$wT5f2rN9eKzW4j9wKjJ3iO9l7E542/gB6Q7u88N9m5o8i8t5sY7Gy",
+      "createdAt": "2026-01-15T10:00:00.000Z"
+    },
+    {
+      "id": "user-demo-2",
+      "name": "Elena Vance",
+      "email": "elena@example.com",
+      "passwordHash": "$2a$10$wT5f2rN9eKzW4j9wKjJ3iO9l7E542/gB6Q7u88N9m5o8i8t5sY7Gy",
+      "createdAt": "2026-02-01T12:00:00.000Z"
+    },
+    {
+      "id": "usr-1793014544562-gq78i",
+      "name": "mass2004",
+      "email": "jithsathya24@gmail.com",
+      "passwordHash": "$2b$10$HGUYtoKuWsD.8j7I42YO3.AKnwbL6MWZ.TpOdMpK4Gr5Iy2F9oeWO",
+      "createdAt": "2026-10-26T11:35:44.562Z"
+    }
+  ],
+  "blogs": [
+    {
+      "id": "blog-1",
+      "title": "Mastering Clean Architecture in Modern Web Applications",
+      "content": "Clean architecture separates software into layers with distinct responsibilities. By isolating domain logic, entities, and presentation layers, your code stays testable, maintainable, and resilient against framework churn.\n\n### The Core Pillars\n1. Independent of Frameworks: Your business logic does not know what UI framework or database you run.\n2. Testable: Business rules can be validated without the UI, Database, or Web Server.\n3. Independent of UI: The frontend can switch without rewriting domain workflows.\n\nApplying these patterns elevates software reliability and makes developer onboarding effortless.",
+      "summary": "Discover how separating concerns and adhering to clean architecture makes your apps testable, decoupled, and future-proof.",
+      "category": "Architecture",
+      "readTime": "4 min read",
+      "authorId": "user-demo-1",
+      "authorName": "Alex Rivera",
+      "authorEmail": "alex@example.com",
+      "createdAt": "2026-02-10T14:30:00.000Z",
+      "updatedAt": "2026-02-10T14:30:00.000Z"
+    },
+    {
+      "id": "blog-2",
+      "title": "Minimalist Lime & White UI: The Power of High-Contrast Design",
+      "content": "Minimalism is not the lack of something. It's simply the perfect amount of everything. When pairing electric lime (#84cc16 / #a3e635) with crisp clean white and obsidian dark surfaces, the visual rhythm commands attention without overwhelming cognitive load.\n\n### Why High Accent Works\n- Accent highlights direct focus directly to primary calls-to-action.\n- Crisp typography enhances content legibility.\n- Strategic negative space breathes elegance into every layout.\n\nDesign is as much about what you leave out as what you put in.",
+      "summary": "Explore the art of minimalist aesthetics, typography hierarchy, and deliberate accent colors in UI/UX engineering.",
+      "category": "Design",
+      "readTime": "3 min read",
+      "authorId": "user-demo-2",
+      "authorName": "Elena Vance",
+      "authorEmail": "elena@example.com",
+      "createdAt": "2026-02-18T09:15:00.000Z",
+      "updatedAt": "2026-02-18T09:15:00.000Z"
+    },
+    {
+      "id": "blog-3",
+      "title": "Full-Stack Performance at Scale: Server Actions and Edge APIs",
+      "content": "Modern server-side rendering combined with Edge-compatible micro-handlers allows web applications to hit sub-100ms response times anywhere across the globe.\n\nThrough intelligent caching, lean JSON serialization, and stateless token authentication, developers can deliver world-class full-stack experiences without heavyweight infrastructure overhead.",
+      "summary": "Techniques for achieving lightning fast latency, optimized database queries, and frictionless state handling.",
+      "category": "Performance",
+      "readTime": "5 min read",
+      "authorId": "user-demo-1",
+      "authorName": "Alex Rivera",
+      "authorEmail": "alex@example.com",
+      "createdAt": "2026-02-25T11:20:00.000Z",
+      "updatedAt": "2026-02-25T11:20:00.000Z"
+    },
+    {
+      "id": "blog-1793014703320-oh8j",
+      "title": "modern technology",
+      "content": "The history of artificial intelligence (AI) began in antiquity, with myths, stories, and rumors of artificial beings endowed with intelligence by master craftsmen.[1]\n\nThe field of research that eventually evolved into what is widely described as artificial intelligence was founded at a workshop held on the campus of Dartmouth College in 1956.[2] At the workshop, a concept of the first AI program, Logic Theorist, was presented by future Turing Awardee Allen Newell and future Nobel Laureate Herbert A. Simon, with help from J. C. Shaw. The software architecture of this program differed from modern AI systems in that it was a hand-written fixed script. Attendees of the workshop became the leaders of AI research for decades. Many of them predicted that machines as intelligent as humans would exist within a generation. Despite the eventual success of its attendees and the field as a whole, the workshop was considered a failure. \"When the workshop failed to deliver, AI was dismissed as a pipe dream and research funding dried up\".[3][4]\n\nIt became apparent that researchers had underestimated the complexity of this objective.[5] In 1974, criticism from James Lighthill and pressure from the U.S. Congress led the U.S. and British Governments to stop funding undirected research into artificial intelligence. Seven years later, a visionary initiative by the Japanese Government and the success of expert systems reinvigorated investment in AI, and by the late 1980s, the industry had grown into a billion-dollar enterprise. However, investors' enthusiasm waned in the 1990s, and the field was criticized in the press and avoided by industry (a period known as an \"AI winter\"). Nevertheless, research and funding continued to grow under other names. In the early 2000s, machine learning was applied to a wide range of problems in academia and industry. The success was attributable to the availability of powerful computer hardware, the accumulation of expansive data sets, and the application of rigorous mathematical methods. Soon after, deep learning proved to be a breakthrough technology, eclipsing all other methods. The transformer architecture, introduced in 2017, and was utilized to produce generative AI applications, among other implementation.\n\nInvestment in AI boomed in the 2020s. The AI boom, initiated by the development of transformer architecture, led to the rapid scaling and public releases of large language models (LLMs) like ChatGPT and Claude (AI). These models exhibit human-like traits of knowledge, attention, and creativity, and have been integrated into various sectors, fueling exponential investment in AI. However, concerns about the potential risks and ethical implications of advanced AI have also emerged, causing debate about the future of AI and its impact on society.",
+      "summary": "AI evolution",
+      "category": "Technology",
+      "readTime": "3 min read",
+      "authorId": "usr-1793014544562-gq78i",
+      "authorName": "mass2004",
+      "authorEmail": "jithsathya24@gmail.com",
+      "createdAt": "2026-10-26T11:38:23.320Z",
+      "updatedAt": "2026-10-26T11:38:23.320Z"
+    }
+  ]
+}

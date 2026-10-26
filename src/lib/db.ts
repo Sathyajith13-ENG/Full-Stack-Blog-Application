@@ -33,6 +33,7 @@ const initialBlogs: Blog[] = [
     content: "Clean architecture separates software into layers with distinct responsibilities. By isolating domain logic, entities, and presentation layers, your code stays testable, maintainable, and resilient against framework churn.\n\n### The Core Pillars\n1. Independent of Frameworks: Your business logic does not know what UI framework or database you run.\n2. Testable: Business rules can be validated without the UI, Database, or Web Server.\n3. Independent of UI: The frontend can switch without rewriting domain workflows.\n\nApplying these patterns elevates software reliability and makes developer onboarding effortless.",
     summary: "Discover how separating concerns and adhering to clean architecture makes your apps testable, decoupled, and future-proof.",
     category: "Architecture",
+    imageUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
     readTime: "4 min read",
     authorId: "user-demo-1",
     authorName: "Alex Rivera",
@@ -46,6 +47,7 @@ const initialBlogs: Blog[] = [
     content: "Minimalism is not the lack of something. It's simply the perfect amount of everything. When pairing electric lime (#84cc16 / #a3e635) with crisp clean white and obsidian dark surfaces, the visual rhythm commands attention without overwhelming cognitive load.\n\n### Why High Accent Works\n- Accent highlights direct focus directly to primary calls-to-action.\n- Crisp typography enhances content legibility.\n- Strategic negative space breathes elegance into every layout.\n\nDesign is as much about what you leave out as what you put in.",
     summary: "Explore the art of minimalist aesthetics, typography hierarchy, and deliberate accent colors in UI/UX engineering.",
     category: "Design",
+    imageUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
     readTime: "3 min read",
     authorId: "user-demo-2",
     authorName: "Elena Vance",
@@ -59,6 +61,7 @@ const initialBlogs: Blog[] = [
     content: "Modern server-side rendering combined with Edge-compatible micro-handlers allows web applications to hit sub-100ms response times anywhere across the globe.\n\nThrough intelligent caching, lean JSON serialization, and stateless token authentication, developers can deliver world-class full-stack experiences without heavyweight infrastructure overhead.",
     summary: "Techniques for achieving lightning fast latency, optimized database queries, and frictionless state handling.",
     category: "Performance",
+    imageUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80",
     readTime: "5 min read",
     authorId: "user-demo-1",
     authorName: "Alex Rivera",
@@ -130,6 +133,14 @@ export const db = {
     data.users.push(user);
     saveData(data);
     return user;
+  },
+  updateUser: (id: string, updates: Partial<User>): User | null => {
+    const data = loadData();
+    const index = data.users.findIndex((u) => u.id === id);
+    if (index === -1) return null;
+    data.users[index] = { ...data.users[index], ...updates };
+    saveData(data);
+    return data.users[index];
   },
 
   // Blog CRUD methods

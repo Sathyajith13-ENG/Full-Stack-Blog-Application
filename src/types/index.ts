@@ -3,6 +3,8 @@ export interface User {
   name: string;
   email: string;
   passwordHash: string;
+  avatarUrl?: string;
+  bio?: string;
   createdAt: string;
 }
 
@@ -12,6 +14,7 @@ export interface Blog {
   content: string;
   summary?: string;
   category?: string;
+  imageUrl?: string;
   readTime?: string;
   authorId: string;
   authorName: string;
@@ -19,3 +22,4 @@ export interface Blog {
   createdAt: string;
   updatedAt: string;
 }
+

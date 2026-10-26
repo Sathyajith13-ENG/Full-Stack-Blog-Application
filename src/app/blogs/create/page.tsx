@@ -15,6 +15,7 @@ export default function CreateBlogPage() {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Architecture");
   const [summary, setSummary] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -49,6 +50,7 @@ export default function CreateBlogPage() {
           title,
           category,
           summary,
+          imageUrl,
           content,
         }),
       });
@@ -166,6 +168,28 @@ export default function CreateBlogPage() {
               onChange={(e) => setSummary(e.target.value)}
             />
           </div>
+        </div>
+
+        <div className="input-group">
+          <label className="input-label" htmlFor="imageUrl">Cover Image URL (Optional)</label>
+          <input
+            id="imageUrl"
+            type="url"
+            className="input-field"
+            placeholder="e.g. https://images.unsplash.com/photo-1555066931-4365d14bab8c"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+          />
+          {imageUrl && (
+            <div style={{ marginTop: "0.5rem", borderRadius: "var(--radius-md)", overflow: "hidden", maxHeight: "180px", border: "1px solid var(--border)" }}>
+              <img
+                src={imageUrl}
+                alt="Article cover preview"
+                style={{ width: "100%", height: "180px", objectFit: "cover" }}
+                onError={(e) => (e.currentTarget.style.display = "none")}
+              />
+            </div>
+          )}
         </div>
 
         <div className="input-group">
